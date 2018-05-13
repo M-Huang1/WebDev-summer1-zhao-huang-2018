@@ -53,4 +53,4 @@ function User(username, password, firstName, lastName, role) {
     function getRole(){
         return this.role;
     }
-    }
+}

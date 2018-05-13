@@ -18,10 +18,10 @@
 <div class="container">
     <h1 id="title" class="customFont">User Admin</h1>
     <table class="table">
-        <col width="200">
+        <col width="250">
         <col width="100">
-        <col width="100">
-        <col width="100">
+        <col width="150">
+        <col width="150">
         <col width="200">
         <col width="200">
         <thead>
@@ -48,11 +48,14 @@
         </thead>
         <tbody>
         <tr class="template">
-            <td class="username">Sample</td>
-            <td class="password">****</td>
-            <td class="firstName">First</td>
-            <td class="lastName">Last</td>
-            <td class="role">Role</td>
+            <td ><input class="form-control username"/></td>
+            <td ><input class="form-control password" type="password"/></td>
+            <td ><input class="form-control firstName" /></td>
+            <td ><input class="form-control lastName"/></td>
+            <td ><select class="form-control role">
+                <option value="FACULTY">Faculty</option>
+                <option value="STUDENT">Student</option>
+            </select></td>
             <th>
                 <button class="delete btn btn-danger">-</button>
                 <button class="edit btn btn-warning">Edit</button>
