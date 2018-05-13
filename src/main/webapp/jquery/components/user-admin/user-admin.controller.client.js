@@ -18,7 +18,6 @@
     }
 
     function findAllUsers() {
-        console.log('Retrieving All Users');
         userService
             .findAllUsers()
             .then(renderUsers);
@@ -54,8 +53,7 @@
             clone.find('.edit').click(editUser);
             clone.find('.firstName').html(user.firstName);
             clone.find('.lastName').html(user.lastName);
-            clone.find('.username')
-                .html(user.username);
+            clone.find('.username').html(user.username);
             tbody.append(clone);
         }
     }

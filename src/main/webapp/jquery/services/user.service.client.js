@@ -53,8 +53,6 @@ function UserServiceClient() {
     }
 
     function findAllUsers() {
-        console.log('Getting all users');
-
         return fetch(self.url)
             .then(function (response) {
                 return response.json();
@@ -68,6 +66,11 @@ function UserServiceClient() {
             headers: {
                 'content-type': 'application/json'
             }
+        }).then(function(response) {
+            responseText = response.text();
+            return responseText;
         });
+
+
     }
 }

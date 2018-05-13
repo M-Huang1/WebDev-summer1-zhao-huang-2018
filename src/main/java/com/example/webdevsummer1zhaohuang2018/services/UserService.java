@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.webdevsummer1zhaohuang2018.models.User;
@@ -26,8 +28,14 @@ public class UserService {
 	}
 	
 	@PostMapping("/api/user")
-	public User createUser(@RequestBody User user) {
-		return repository.save(user);
+	public String createUser(@RequestBody User user) { 
+		if (repository.findUserByUsername(user.getUsername()) == null) {
+				repository.save(user);
+				return "User Created";
+		}
+		else {
+			return "Username Already Taken";
+		}
 	}
 	
 	@PostMapping("/api/login")
