@@ -29,13 +29,9 @@ public class UserService {
 	
 	@PostMapping("/api/user")
 	public String createUser(@RequestBody User user) { 
-		if (repository.findUserByUsername(user.getUsername()) == null) {
-				repository.save(user);
-				return "User Created";
-		}
-		else {
-			return "Username Already Taken";
-		}
+		repository.save(user);
+		return "User Created";
+		
 	}
 	
 	@PostMapping("/api/login")

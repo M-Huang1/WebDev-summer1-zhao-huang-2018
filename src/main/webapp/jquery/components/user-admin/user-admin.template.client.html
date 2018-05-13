@@ -18,20 +18,32 @@
 <div class="container">
     <h1 id="title" class="customFont">User Admin</h1>
     <table class="table">
+        <col width="200">
+        <col width="100">
+        <col width="100">
+        <col width="100">
+        <col width="200">
+        <col width="200">
         <thead>
         <tr>
             <th>Username</th>
             <th>Password</th>
             <th>First Name</th>
             <th>Last Name</th>
+            <th>Role</th>
             <th></th>
         </tr>
         <tr>
-            <th><input id="usernameFld" class="form-control" placeholder="jdoe"/></th>
-            <th><input id="passwordFld" class="form-control" type="password"/></th>
-            <th><input id="firstNameFld" class="form-control" placeholder="John"/></th>
-            <th><input id="lastNameFld" class="form-control" placeholder="Doe"/></th>
-            <th><button id="createUser" class="btn btn-success">Create</button></th>
+            <td><input id="usernameFld" class="form-control" placeholder="jdoe"/></td>
+            <td><input id="passwordFld" class="form-control" type="password"/></td>
+            <td><input id="firstNameFld" class="form-control" placeholder="John"/></td>
+            <td><input id="lastNameFld" class="form-control" placeholder="Doe"/></td>
+            <td><select id="roleFld" class="form-control">
+                <option value="FACULTY">Faculty</option>
+                <option value="STUDENT">Student</option>
+            </select></td>
+
+            <td><button id="createUser" class="btn btn-success">+</button></td>
         </tr>
         </thead>
         <tbody>
@@ -39,9 +51,10 @@
             <td class="username">Sample</td>
             <td class="password">****</td>
             <td class="firstName">First</td>
-            <td class="lastName customFont">Last</td>
+            <td class="lastName">Last</td>
+            <td class="role">Role</td>
             <th>
-                <button class="delete btn btn-danger">Delete</button>
+                <button class="delete btn btn-danger">-</button>
                 <button class="edit btn btn-danger">Edit</button>
             </th>
         </tr>

@@ -24,19 +24,24 @@
     }
 
     function createUser() {
-        console.log('createUser');
+
 
         var username = $('#usernameFld').val();
         var password = $('#passwordFld').val();
         var firstName = $('#firstNameFld').val();
         var lastName = $('#lastNameFld').val();
+        var role = $('#roleFld').val();
 
         var user = {
             username: username,
             password: password,
             firstName: firstName,
-            lastName: lastName
+            lastName: lastName,
+            role: role
         };
+
+        console.log('Creating User');
+        console.log(user);
 
         userService.createUser(user).then(findAllUsers);
     }
@@ -54,6 +59,7 @@
             clone.find('.firstName').html(user.firstName);
             clone.find('.lastName').html(user.lastName);
             clone.find('.username').html(user.username);
+            clone.find('.role').html(user.role);
             tbody.append(clone);
         }
     }

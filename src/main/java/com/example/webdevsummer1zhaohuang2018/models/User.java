@@ -1,19 +1,31 @@
 package com.example.webdevsummer1zhaohuang2018.models;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.validation.constraints.NotEmpty;
 
 @Entity
 public class User {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int id;
+	
+	@NotEmpty
+	@Column(unique=true)
 	private String username;
+	
+	@NotEmpty
 	private String password;
+	@NotEmpty
 	private String firstName;
+	@NotEmpty
 	private String lastName;
+	@NotEmpty
+	private String role;
+	
 	public int getId() {
 		return id;
 	}
@@ -43,5 +55,12 @@ public class User {
 	}
 	public void setLastName(String lastName) {
 		this.lastName = lastName;
+	}
+	
+	public String getRole() {
+		return role;
+	}
+	public void setRole(String role) {
+		this.role = role;
 	}
 }
