@@ -31,19 +31,27 @@
         var firstName = $('#firstNameFld').val();
         var lastName = $('#lastNameFld').val();
         var role = $('#roleFld').val();
+        var email = $('#emailFld').val();
+        var dob = $('#dobFld').val();
 
         var user = {
             username: username,
             password: password,
             firstName: firstName,
             lastName: lastName,
-            role: role
+            role: role,
+            email:email,
+            dob:dob
         };
 
         console.log('Creating User');
         console.log(user);
 
-        userService.createUser(user).then(findAllUsers);
+        userService.createUser(user).then(
+            function (response) {
+                console.log(response);
+                findAllUsers();
+            });
     }
 
     function renderUsers(users) {
@@ -61,6 +69,10 @@
             clone.find('.firstName').val(user.firstName);
             clone.find('.lastName').val(user.lastName);
             clone.find('.role').val(user.role);
+            clone.find('.email').val(user.email);
+            clone.find('.dob').val(user.dob);
+
+
             tbody.append(clone);
         }
     }
@@ -83,13 +95,15 @@
             .parent()
             .parent()
             .attr('id');
-        parentRow = updateBtn.parent().parent();
+        var parentRow = updateBtn.parent().parent();
         var user = {
             username: parentRow.find('.username').val(),
             password: parentRow.find('.password').val(),
             firstName: parentRow.find('.firstName').val(),
             lastName: parentRow.find('.lastName').val(),
-            role:parentRow.find('.role').val()
+            role: parentRow.find('.role').val(),
+            email: parentRow.find('.email').val(),
+            DOB: parentRow.find('.dob').val()
         };
 
         userService.updateUser(userId, user).then(findAllUsers);

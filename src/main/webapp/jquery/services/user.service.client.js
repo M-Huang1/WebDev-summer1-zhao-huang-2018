@@ -69,7 +69,7 @@ function UserServiceClient() {
         }).then(function(response) {
             responseText = response.text();
             return responseText;
-        });
+        })
 
 
     }

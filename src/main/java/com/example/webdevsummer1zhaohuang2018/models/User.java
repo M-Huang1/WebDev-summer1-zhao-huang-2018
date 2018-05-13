@@ -26,6 +26,15 @@ public class User {
 	@NotEmpty
 	private String role;
 	
+	@NotEmpty
+	@Column(unique=true)
+	private String email;
+	
+	@NotEmpty
+	private String dob;
+	
+	
+	
 	public int getId() {
 		return id;
 	}
@@ -62,5 +71,19 @@ public class User {
 	}
 	public void setRole(String role) {
 		this.role = role;
+	}
+	
+	public String getEmail() {
+		return email;
+	}
+	public void setEmail(String email) {
+		this.email = email;
+	}
+	
+	public String getDob() {
+		return dob;
+	}
+	public void setDob(String dob) {
+		this.dob = dob;
 	}
 }

@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.webdevsummer1zhaohuang2018.models.User;
@@ -19,6 +20,8 @@ import com.example.webdevsummer1zhaohuang2018.repositories.UserRepository;
 
 @RestController
 public class UserService {
+	
+	
 	@Autowired
 	UserRepository repository;
 	
@@ -28,7 +31,9 @@ public class UserService {
 	}
 	
 	@PostMapping("/api/user")
+	@ResponseBody
 	public String createUser(@RequestBody User user) { 
+
 		repository.save(user);
 		return "User Created";
 		
@@ -45,6 +50,7 @@ public class UserService {
 	}
 	
 	@PutMapping("/api/user/{userId}")
+	@ResponseBody
 	public User updateUser(@PathVariable("userId") int userId, @RequestBody User newUser) {
 		Optional<User> data = repository.findById(userId);
 		if(data.isPresent()) {
@@ -54,6 +60,8 @@ public class UserService {
 			user.setLastName(newUser.getLastName());
 			user.setPassword(newUser.getPassword());
 			user.setRole(newUser.getRole());
+			user.setEmail(newUser.getEmail());
+			user.setDob(newUser.getDob());
 			repository.save(user);
 			return user;
 		}
