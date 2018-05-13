@@ -7,12 +7,12 @@ function UserServiceClient() {
     this.login = login;
     this.url =
         'http://localhost:8080/api/user';
-    this.login =
+    this.login_url =
         'http://localhost:8080/api/login';
     var self = this;
 
     function login(username, password) {
-        return fetch(self.login, {
+        return fetch(self.login_url, {
             method: 'post',
             body: JSON.stringify({username:username, password: password}),
             headers: {
@@ -30,7 +30,8 @@ function UserServiceClient() {
             }
         })
             .then(function(response){
-                if(response.bodyUsed) {
+                console.log(response);
+                if(response.ok) {
                     return response.json();
                 } else {
                     return null;
@@ -52,6 +53,8 @@ function UserServiceClient() {
     }
 
     function findAllUsers() {
+        console.log('Getting all users');
+
         return fetch(self.url)
             .then(function (response) {
                 return response.json();

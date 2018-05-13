@@ -1,4 +1,5 @@
 
+
 //IIFE
 (function () {
 
@@ -11,12 +12,13 @@
     function main() {
         tbody = $('tbody');
         template = $('.template');
-        $('#createUser').click(createUser);
+        $('#createUser').on('click',createUser);
 
         findAllUsers();
     }
 
     function findAllUsers() {
+        console.log('Retrieving All Users');
         userService
             .findAllUsers()
             .then(renderUsers);
@@ -50,7 +52,8 @@
 
             clone.find('.delete').click(deleteUser);
             clone.find('.edit').click(editUser);
-
+            clone.find('.firstName').html(user.firstName);
+            clone.find('.lastName').html(user.lastName);
             clone.find('.username')
                 .html(user.username);
             tbody.append(clone);

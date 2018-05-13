@@ -25,11 +25,14 @@
 
         userService
             .updateUser(12, user)
-            .then(success);
+            .then(success)
+            .then(renderUser);
+
+
     }
 
     function success(response) {
-        if(response === null) {
+        if(response == null) {
             alert('unable to update')
         } else {
             alert('success');
@@ -46,6 +49,6 @@
         console.log(user);
         $staticEmail.val(user.username);
         $firstName.val(user.firstName);
-        $lastName.val(user.lasteName);
+        $lastName.val(user.lastName);
     }
 })();
