@@ -58,7 +58,12 @@
                         console.log('Registering User');
                         console.log(user);
 
-                        userService.registerUser(user);
+                        userService.registerUser(user).then(
+                            function(){
+                                window.location="/jquery/components/login/login.template.client.html"
+                            }
+                        )
+
                     }
 
                 }
