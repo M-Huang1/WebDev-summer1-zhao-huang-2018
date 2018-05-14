@@ -23,6 +23,8 @@
                 }
                 else {
                     userId = response.valueOf();
+                    
+                    window.location='/jquery/components/profile/profile.template.client.html?userId=' + userId;
                 }
             });
 
