@@ -9,6 +9,7 @@
     var template;
     var userService = new UserServiceClient();
 
+
     function main() {
         tbody = $('tbody');
         template = $('.template');

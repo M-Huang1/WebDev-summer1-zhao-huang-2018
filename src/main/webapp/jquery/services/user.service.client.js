@@ -3,12 +3,15 @@ function UserServiceClient() {
     this.findAllUsers = findAllUsers;
     this.deleteUser = deleteUser;
     this.findUserById = findUserById;
+    this.findUserByUsername = findUserByUsername;
+    this.registerUser = registerUser;
+    this.findUserByEmail = findUserByEmail;
     this.updateUser = updateUser;
     this.login = login;
     this.url =
-        'http://localhost:8080/api/user';
+        '/api/user';
     this.login_url =
-        'http://localhost:8080/api/login';
+        '/api/login';
     var self = this;
 
     function login(username, password) {
@@ -46,6 +49,34 @@ function UserServiceClient() {
             });
     }
 
+    function findUserByUsername(username) {
+        return fetch(self.url + '/username/' + username, {
+            method: 'get'
+        }).then(function(response){
+                if(response.status != 200){
+                    return null;
+                }
+                else{
+                    return response.json();
+                }
+
+
+            });
+    }
+
+    function findUserByEmail(email) {
+        return fetch(self.url + '/email/' + email, {
+            method: 'get'
+        }).then(function(response) {
+            if (response.status != 200) {
+                return null;
+            }
+            else {
+                return response.json();
+            }
+        });
+    }
+
     function deleteUser(userId) {
         return fetch(self.url + '/' + userId, {
             method: 'delete'
@@ -59,6 +90,20 @@ function UserServiceClient() {
             });
     }
 
+    function registerUser(user) {
+        return fetch('/api/register', {
+            method: 'post',
+            body: JSON.stringify(user),
+            headers: {
+                'content-type': 'application/json'
+            }
+        }).then(function(response) {
+            responseText = response.text();
+            return responseText;
+        })
+
+
+    }
     function createUser(user) {
         return fetch(self.url, {
             method: 'post',

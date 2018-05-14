@@ -20,4 +20,8 @@ public interface UserRepository
 	@Query("SELECT u FROM User u WHERE u.username=:username")
 	Optional<User> findUserByUsername(
 		@Param("username") String username); 
+	
+	@Query("SELECT u FROM User u WHERE u.email=:email")
+	Optional<User> findUserByEmail(
+		@Param("email") String email); 
 }

@@ -3,7 +3,6 @@
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-    <link rel="stylesheet" href="/resources/demos/style.css">
 
     <link href="register.style.client.css" rel="stylesheet"/>
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet"/>
@@ -23,13 +22,16 @@
             $( "#datepicker" ).datepicker();
         } );
     </script>
+    <script src="register.controller.client.js"></script>
 </head>
 <body>
 <div class="container">
     <h1>Register</h1>
     <div class="TextBox">Username: <input class="Input" id="usernameFld"/></div>
-    <div class="TextBox"> Password: <input class="Input" id="passwordFld"/></div>
-    <div class="TextBox">Verify Password: <input class="Input" id="verifyPasswordFld"/></div>
+    <div class="TextBox">First Name: <input class="Input" id="firstNameFld"/></div>
+    <div class="TextBox">Last Name: <input class="Input" id="lastNameFld"/></div>
+    <div class="TextBox">Password: <input class="Input" id="passwordFld" type="password"/></div>
+    <div class="TextBox">Verify Password: <input class="Input" type="password" id="verifyPasswordFld"/></div>
     <div class="TextBox">Role: <select class="Input" id="roleFld">
         <option value="FACULTY">Faculty</option>
         <option value="STUDENT">Student</option>
