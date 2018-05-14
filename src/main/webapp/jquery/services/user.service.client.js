@@ -14,10 +14,10 @@ function UserServiceClient() {
         '/api/login';
     var self = this;
 
-    function login(username, password) {
+    function login(user) {
         return fetch(self.login_url, {
             method: 'post',
-            body: JSON.stringify({username:username, password: password}),
+            body: JSON.stringify(user),
             headers: {
                 'content-type': 'application/json'
             }
@@ -49,6 +49,25 @@ function UserServiceClient() {
             });
     }
 
+    function login(user) {
+        console.log(user);
+        return fetch('/api/login', {
+            method: 'post',
+            body: JSON.stringify(user),
+            headers: {
+                'content-type': 'application/json'
+            }
+        }).then(function(response){
+            if(response.status != 200){
+                return null;
+            }
+            else{
+                return response.text();
+            }
+
+
+        });
+    }
     function findUserByUsername(username) {
         return fetch(self.url + '/username/' + username, {
             method: 'get'
@@ -105,6 +124,7 @@ function UserServiceClient() {
 
     }
     function createUser(user) {
+
         return fetch(self.url, {
             method: 'post',
             body: JSON.stringify(user),

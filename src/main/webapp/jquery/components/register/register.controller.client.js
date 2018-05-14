@@ -53,7 +53,6 @@
                         alert("Your verification password doesn't match your password!")
                         toCreate = false;
                     }
-                    console.log(toCreate);
                     if (toCreate) {
                         console.log('Registering User');
                         console.log(user);

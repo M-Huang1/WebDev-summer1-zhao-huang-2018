@@ -5,6 +5,7 @@ import java.util.Optional;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -50,10 +51,7 @@ public class UserService {
 		
 	}
 	
-	@PostMapping("/api/login")
-	public List<User> login(@RequestBody User user) {
-		return (List<User>) repository.findUserByCredentials(user.getUsername(), user.getPassword());
-	}
+
 	
 	@GetMapping("/api/user")
 	public List<User> findAllUsers() {
@@ -83,7 +81,6 @@ public class UserService {
 	public User findUserById(@PathVariable("userId") int userId, HttpServletResponse response) {
 		Optional<User> data = repository.findById(userId);
 		if(data.isPresent()) {
-			System.out.println("Found It!!");
 			return data.get();}
 		response.setStatus(HttpServletResponse.SC_NOT_FOUND);
 		return null;
@@ -106,4 +103,16 @@ public class UserService {
 		response.setStatus(HttpServletResponse.SC_NOT_FOUND);
 		return null;
 	}
+	
+	@PostMapping("/api/login")
+	public String findUserByCredentials(@RequestBody User user, HttpServletResponse response) {
+		Optional<User> data = repository.findUserByCredentials(user.getUsername(),user.getPassword());
+		if(data.isPresent()) {
+			return Integer.toString(data.get().getId());
+		}
+		response.setStatus(HttpServletResponse.SC_NOT_FOUND);
+		return "-1";
+	}
+	
+	
 }
