@@ -2,22 +2,40 @@
 <html>
 <head>
     <meta charset="UTF-8">
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <link rel="stylesheet" href="/resources/demos/style.css">
+
+    <link href="register.style.client.css" rel="stylesheet"/>
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet"/>
 
     <title>Sign Up</title>
+
     <script
             src="https://code.jquery.com/jquery-3.3.1.min.js"
             integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
             crossorigin="anonymous">
     </script>
     <script src="../../services/user.service.client.js"></script>
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script>
+        $( function() {
+            $( "#datepicker" ).datepicker();
+        } );
+    </script>
 </head>
 <body>
 <div class="container">
     <h1>Register</h1>
-    <div>Username: <input id="usernameFld"/> </div>
-    <div> Password: <input id="passwordFld"/></div>
-    <div>Verify Password: <input id="verifyPasswordFld"/></div>
-    <div><button id="registerBtn">Register</button></div>
+    <div class="TextBox">Username: <input class="Input" id="usernameFld"/></div>
+    <div class="TextBox"> Password: <input class="Input" id="passwordFld"/></div>
+    <div class="TextBox">Verify Password: <input class="Input" id="verifyPasswordFld"/></div>
+    <div class="TextBox">Role: <select class="Input" id="roleFld">
+        <option value="FACULTY">Faculty</option>
+        <option value="STUDENT">Student</option>
+    </select></div>
+    <div class="TextBox">Email: <input class="Input"  id="emailFld" placeholder="Doe@gmail.com"/></div>
+    <div class="TextBox">Date of Birth: <input type="text"  id="datepicker" placeholder="mm/dd/yyyy"/></div>
+    <div><button class= " myButton btn btn-primary" id="registerBTN">Register</button></div>
 </div>
 </body>
