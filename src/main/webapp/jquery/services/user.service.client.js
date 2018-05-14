@@ -45,8 +45,15 @@ function UserServiceClient() {
     function findUserById(userId) {
         return fetch(self.url + '/' + userId)
             .then(function(response){
-                return response.json();
-            });
+                if(response.status != 200){
+                    return null;
+                }
+                else{
+                    return response.json();
+                }
+
+
+            })
     }
 
     function login(user) {

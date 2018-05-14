@@ -104,7 +104,7 @@
             lastName: parentRow.find('.lastName').val(),
             role: parentRow.find('.role').val(),
             email: parentRow.find('.email').val(),
-            DOB: parentRow.find('.dob').val()
+            dob: parentRow.find('.dob').val()
         };
 
         userService.updateUser(userId, user).then(findAllUsers);
