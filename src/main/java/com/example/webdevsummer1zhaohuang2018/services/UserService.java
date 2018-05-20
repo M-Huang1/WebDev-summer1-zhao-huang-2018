@@ -3,6 +3,7 @@ import java.util.List;
 import java.util.Optional;
 
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
@@ -36,8 +37,9 @@ public class UserService {
 	
 	@PostMapping("/api/register")
 	@ResponseBody
-	public String registerUser(@RequestBody User user) { 
+	public String registerUser(@RequestBody User user, HttpSession session) { 
 		repository.save(user);
+		session.setAttribute("user", user);
 		return "User Registered";
 		
 	}
@@ -105,9 +107,12 @@ public class UserService {
 	}
 	
 	@PostMapping("/api/login")
-	public String findUserByCredentials(@RequestBody User user, HttpServletResponse response) {
+	public String findUserByCredentials(@RequestBody User user, HttpServletResponse response, HttpSession session) {
 		Optional<User> data = repository.findUserByCredentials(user.getUsername(),user.getPassword());
 		if(data.isPresent()) {
+			session.setAttribute("user", data);
+			System.out.println(session.getAttribute("user"));
+			System.out.println(((Optional<User>)session.getAttribute("user")).get().getId());
 			return Integer.toString(data.get().getId());
 		}
 		response.setStatus(HttpServletResponse.SC_NOT_FOUND);
