@@ -14,11 +14,11 @@ public class Course {
 	@Column(unique=true)
 	private String title;
 	
-	@NotEmpty
+	
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date created;
 	
-	@NotEmpty
+	
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date modified;
 	
