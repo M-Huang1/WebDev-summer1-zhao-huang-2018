@@ -1,11 +1,13 @@
 package com.example.webdevsummer1zhaohuang2018.services;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -19,12 +21,14 @@ import com.example.webdevsummer1zhaohuang2018.models.Course;
 import com.example.webdevsummer1zhaohuang2018.repositories.CourseRepository;
 
 @RestController
+@CrossOrigin(origins = "*", maxAge = 3600)
 public class CourseServices {
 	
 	@Autowired
 	CourseRepository courseRepository;
 	
 	@GetMapping("/api/course")
+	@CrossOrigin()
 	public List<Course> findAllCourses() {
 		return (List<Course>) courseRepository.findAll(); 
 	}
@@ -37,6 +41,9 @@ public class CourseServices {
 			response.setStatus(HttpServletResponse.SC_CONFLICT);
 			return "{\"error\":\"A course already exists with that title\"}";
 		}
+		
+		course.setCreated(new Date());
+		course.setModified(new Date());
 		courseRepository.save(course);
 		return"{\"Success\":\"User Created!\"}" ;
 		
@@ -46,11 +53,12 @@ public class CourseServices {
 	@PutMapping("/api/course")
 	@ResponseBody
 	public String updateCourse(@RequestBody Course course, HttpServletResponse response) {
-		Optional<Course> foundCourse = this.courseRepository.findCourseByTitle(course.getTitle());
+		Optional<Course> foundCourse = this.courseRepository.findById(course.getId());
 		if(foundCourse.isPresent() == false) {
 			response.setStatus(HttpServletResponse.SC_NOT_FOUND);
 			return "{\"error\":\"A course does not exist with that id\"}";
 		}
+		course.setModified(new Date());
 		courseRepository.save(course);
 		return"{\"Success\":\"User Updated!\"}" ;
 		
