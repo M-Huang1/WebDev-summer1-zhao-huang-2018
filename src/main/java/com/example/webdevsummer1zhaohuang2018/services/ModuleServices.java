@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -72,6 +73,28 @@ public class ModuleServices {
 		return"{\"Success\":\"Module Deleted\"}"; 
 	}
 	
+	@GetMapping("/api/module/{moduleId}")
+	public Module getModuleById(@PathVariable("moduleId") int id, HttpServletResponse response) {
+		Optional<Module> module = moduleRepository.findById(id);
+		if(module.isPresent() == false) {
+			response.setStatus(HttpServletResponse.SC_NOT_FOUND);
+			return null;
+		}
+		
+		return module.get(); 
+	}
+	
+	@PutMapping("/api/module/{moduleId}")
+	public String updateModule(@RequestBody Module module, @PathVariable("moduleId") int id, HttpServletResponse response) {
+		Optional<Module> moduleData = moduleRepository.findById(id);
+		if(moduleData.isPresent() == false) {
+			response.setStatus(HttpServletResponse.SC_NOT_FOUND);
+			return"{\"error\":\"Module With That Id Not Found\"}";
+		}
+		module.setId(id);
+		moduleRepository.save(module);
+		return"{\"Success\":\"Module Updated\"}";
+	}
 	@GetMapping("/api/module")
 	public List<Module> findAllModules()
 	{
