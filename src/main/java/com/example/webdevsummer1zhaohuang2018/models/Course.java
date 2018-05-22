@@ -24,7 +24,7 @@ public class Course {
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date modified;
 	
-	@OneToMany(mappedBy="course")
+	@OneToMany(cascade=CascadeType.ALL,mappedBy="course")
 	private List<Module> modules;
 	
 	//Return Id of course

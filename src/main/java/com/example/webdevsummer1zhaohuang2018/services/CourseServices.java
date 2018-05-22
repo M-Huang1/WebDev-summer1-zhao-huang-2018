@@ -1,5 +1,6 @@
 package com.example.webdevsummer1zhaohuang2018.services;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
@@ -18,6 +19,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.webdevsummer1zhaohuang2018.models.Course;
+import com.example.webdevsummer1zhaohuang2018.models.Module;
 import com.example.webdevsummer1zhaohuang2018.repositories.CourseRepository;
 
 @RestController
@@ -41,9 +43,10 @@ public class CourseServices {
 			response.setStatus(HttpServletResponse.SC_CONFLICT);
 			return "{\"error\":\"A course already exists with that title\"}";
 		}
-		
+		List<Module> modules = new ArrayList<Module>();
 		course.setCreated(new Date());
 		course.setModified(new Date());
+		course.setModules(modules);
 		courseRepository.save(course);
 		return"{\"Success\":\"User Created!\"}" ;
 		
