@@ -1,7 +1,10 @@
 package com.example.webdevsummer1zhaohuang2018.services;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
+
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -28,17 +31,23 @@ public class ModuleServices {
 	ModuleRepository moduleRepository;
 	
 	@PostMapping("/api/course/{courseId}/module")
-	public Module createModule(
+	public String createModule(
 			@PathVariable("courseId") int courseId,
-			@RequestBody Module newModule) {
+			@RequestBody Module newModule, HttpServletResponse response) {
+	
 		Optional<Course> data = courseRepository.findById(courseId);
 		
 		if(data.isPresent()) {
 			Course course = data.get();
+			course.setModified(new Date());
+			courseRepository.save(course);
 			newModule.setCourse(course);
-			return moduleRepository.save(newModule);
+			
+			moduleRepository.save(newModule);
+			return"{\"Success\":\"Module Created!\"}" ;
 		}
-		return null;		
+		response.setStatus(HttpServletResponse.SC_NOT_FOUND);
+		return "{\"Error\":\"Course Not Found\"}";		
 	}
 	
 	@GetMapping("/api/course/{courseId}/module")
@@ -53,9 +62,14 @@ public class ModuleServices {
 	}
 	
 	@DeleteMapping("/api/module/{moduleId}")
-	public void deleteModule(@PathVariable("moduleId") int moduleId)
-	{
-		moduleRepository.deleteById(moduleId);
+	public String deleteModule(@PathVariable("moduleId") int id, HttpServletResponse response) {
+		Optional<Module> module = moduleRepository.findById(id);
+		if(module.isPresent() == false) {
+			response.setStatus(HttpServletResponse.SC_NOT_FOUND);
+			return "{\"error\":\"A module does not exist with that id\"}";
+		}
+		moduleRepository.deleteById(id);
+		return"{\"Success\":\"Module Deleted\"}"; 
 	}
 	
 	@GetMapping("/api/module")
