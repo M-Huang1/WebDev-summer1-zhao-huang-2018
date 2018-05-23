@@ -10,7 +10,7 @@ import javax.validation.constraints.NotEmpty;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
-public class Lesson {
+public class Lesson implements Comparable<Lesson> {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int id;
@@ -44,6 +44,15 @@ public class Lesson {
 
 	public void setModule(Module module) {
 		this.module = module;
+	}
+	
+	public int compareTo(Lesson lesson) {
+		if (lesson.getId() > this.getId()) {
+			return -1;
+		}
+		else {
+			return 1;
+		}
 	}
 
 

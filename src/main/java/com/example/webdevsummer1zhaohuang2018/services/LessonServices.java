@@ -1,5 +1,6 @@
 package com.example.webdevsummer1zhaohuang2018.services;
 
+import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
@@ -71,7 +72,9 @@ public class LessonServices {
 		if(cData.isPresent()) {		
 			Optional<Module> mData = moduleRepository.findById(moduleId);
 			if(mData.isPresent()) {
-				return mData.get().getLessons();
+				List<Lesson> toReturn = mData.get().getLessons();
+				Collections.sort(toReturn);
+				return toReturn;
 				
 			}
 			return null;
