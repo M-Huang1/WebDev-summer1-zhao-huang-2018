@@ -29,6 +29,7 @@ public class Lesson implements Comparable<Lesson> {
 	@OneToMany(cascade=CascadeType.ALL,mappedBy="lesson")
 	private List<Widget> widgets;
 	
+	
 	public int getId() {
 		return id;
 	}
@@ -60,7 +61,11 @@ public class Lesson implements Comparable<Lesson> {
 	public void setWidgets(List<Widget> widgets) {
 		this.widgets = widgets;
 	}
+	
 
+
+	
+	
 	public int compareTo(Lesson lesson) {
 		if (lesson.getId() > this.getId()) {
 			return -1;
