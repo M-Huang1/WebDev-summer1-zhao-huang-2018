@@ -25,22 +25,19 @@ public class Widget implements Comparable<Widget> {
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "order_id_sequence")
 	private int id;
 	
-	@NotEmpty
 	private String text;
 	
-	@NotEmpty
 	private String name;
 	
 
 	private int widgetOrder;
 	
-	@NotEmpty
+
 	private String className;
 	
-	@NotEmpty
+
 	private String width;
 	
-	@NotEmpty
 	private String height;
 	
 	private String src;

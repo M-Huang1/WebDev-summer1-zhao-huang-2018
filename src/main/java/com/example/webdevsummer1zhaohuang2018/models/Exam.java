@@ -17,6 +17,8 @@ public class Exam extends Widget {
 	@NotEmpty
 	private String description;
 	
+	private int points;
+	
 	@OneToMany(cascade=CascadeType.ALL,mappedBy="exam")
 	private List<BaseExamQuestion> questions;
 
@@ -43,6 +45,14 @@ public class Exam extends Widget {
 
 	public void setDescription(String description) {
 		this.description = description;
+	}
+
+	public int getPoints() {
+		return points;
+	}
+
+	public void setPoints(int points) {
+		this.points = points;
 	}
 
 

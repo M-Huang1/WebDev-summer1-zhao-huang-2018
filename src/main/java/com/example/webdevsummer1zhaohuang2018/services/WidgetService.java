@@ -62,37 +62,25 @@ public class WidgetService {
 		return (List<Widget>) repository.findAll();
 	}
 		
-	@GetMapping("/api/course/{courseId}/module/{moduleId}/lesson/{lessonId}/widget")
+	@GetMapping("/api/lesson/{lessonId}/widget")
 	public List<Widget> findAllWidgetsForLesson(
-			@PathVariable("courseId") int courseId,
-			@PathVariable("moduleId") int moduleId,
 			@PathVariable("lessonId") int lessonId) {
-		Optional<Course> cData = courseRepository.findById(courseId);
-		if(cData.isPresent()) {		
-			Optional<Module> mData = moduleRepository.findById(moduleId);
-			if(mData.isPresent()) {
-				Optional<Lesson> lData = lessonRepository.findById(lessonId);
-				if(lData.isPresent()) {
-					List<Widget> toReturn = lData.get().getWidgets();
-					Collections.sort(toReturn);
-					int index = 1;
-					while(index < toReturn.size() + 1) {
-						toReturn.get(index - 1).setWidgetOrder(index);
-						repository.save(toReturn.get(index - 1));
-						index += 1;
-					}
-					return lData.get().getWidgets();
-				}
-				return null;
-				
-				
-			}
-			return null;
-		}
-		
-		return null;		
-	}
 	
+		Optional<Lesson> lData = lessonRepository.findById(lessonId);
+		if(lData.isPresent()) {
+			List<Widget> toReturn = lData.get().getWidgets();
+			Collections.sort(toReturn);
+			int index = 1;
+			while(index < toReturn.size() + 1) {
+				toReturn.get(index - 1).setWidgetOrder(index);
+				repository.save(toReturn.get(index - 1));
+				index += 1;
+			}
+			return toReturn;
+		}
+		return null;
+	}	
+
 
 	@PostMapping("/api/widget/lesson/{lessonId}/save")
 	public String saveWidgetList(

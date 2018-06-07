@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -33,13 +34,13 @@ public class AssignmentServices {
 	LessonRepository lessonRepository;
 	
 	@GetMapping("/api/assignment")
-	public List<Assignment> findAllLessons()
+	public List<Assignment> findAllAssignments()
 	{
 		return (List<Assignment>) assignmentRepository.findAll();
 	}
 	
 	@GetMapping("/api/assignment/{assignmentId}")
-	public Assignment getLessonById(@PathVariable("assignmentId") int id, HttpServletResponse response) {
+	public Assignment getAssignmentById(@PathVariable("assignmentId") int id, HttpServletResponse response) {
 		Optional<Assignment> assignment = assignmentRepository.findById(id);
 		if(assignment.isPresent() == false) {
 			response.setStatus(HttpServletResponse.SC_NOT_FOUND);
@@ -47,6 +48,19 @@ public class AssignmentServices {
 		}
 		
 		return assignment.get(); 
+	}
+	
+	@PutMapping("/api/assignment/{assignmentId}")
+	public String updateAssignment(@RequestBody Assignment assignment, @PathVariable("assignmentId") int id, HttpServletResponse response) {
+		Optional<Assignment> assignmentData = assignmentRepository.findById(id);
+		if(assignmentData.isPresent() == false) {
+			response.setStatus(HttpServletResponse.SC_NOT_FOUND);
+			return"{\"error\":\"Assignment With That Id Not Found\"}";
+		}
+		assignment.setId(id);
+		assignment.setLesson(assignmentData.get().getLesson());
+		assignmentRepository.save(assignment);
+		return"{\"Success\":\"Assignment Updated\"}";
 	}
 
 	@DeleteMapping("/api/assignment/{assignmentId}")
