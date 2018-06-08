@@ -1,6 +1,6 @@
 package com.example.webdevsummer1zhaohuang2018.models;
 
-import javax.persistence.Column;
+
 import javax.persistence.Entity;
 import javax.persistence.Table;
 
@@ -9,14 +9,6 @@ import javax.persistence.Table;
 public class FillInTheBlanksExamQuestion
   extends BaseExamQuestion {
   
-	@Column(name = "VARIABLES", nullable = false) 
-	private String variables;
 
-	public String getVariables() {
-		return variables;
-	}
-
-	public void setVariables(String variables) {
-		this.variables = variables;
-	}
 }
+ 

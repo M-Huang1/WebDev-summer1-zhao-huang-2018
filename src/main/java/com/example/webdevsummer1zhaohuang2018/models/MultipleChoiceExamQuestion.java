@@ -9,18 +9,10 @@ import javax.persistence.Table;
 public class MultipleChoiceExamQuestion
   extends BaseExamQuestion {
   
-	@Column(name = "OPTIONS", nullable = false)
-	private String options;
 	
 	@Column(name = "CORRECT_OPTION", nullable = false)
 	private int correctOption;
-	
-	public String getOptions() {
-		return options;
-	}
-	public void setOptions(String options) {
-		this.options = options;
-	}
+
 	public int getCorrectOption() {
 		return correctOption;
 	}

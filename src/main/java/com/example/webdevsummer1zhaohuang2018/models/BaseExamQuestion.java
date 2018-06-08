@@ -23,7 +23,7 @@ public class BaseExamQuestion implements Comparable<BaseExamQuestion>{
 	private int points;
   
 
-	private String title, description, instructions;
+	private String title, type,instruction, description, question;
   
 	@ManyToOne
 	@JsonIgnore
@@ -70,14 +70,31 @@ public class BaseExamQuestion implements Comparable<BaseExamQuestion>{
 	public void setDescription(String description) {
 		this.description = description;
 		}
-	
-	public String getInstructions() {
-		return instructions;
-		}
-	
-	public void setInstructions(String instructions) {
-		this.instructions = instructions;
-		}
+
+
+	public String getQuestion() {
+		return question;
+	}
+
+	public void setQuestion(String question) {
+		this.question = question;
+	}
+
+	public String getInstruction() {
+		return instruction;
+	}
+
+	public void setInstruction(String instruction) {
+		this.instruction = instruction;
+	}
+
+	public String getType() {
+		return type;
+	}
+
+	public void setType(String type) {
+		this.type = type;
+	}
 
 	public int compareTo(BaseExamQuestion base) {
 		if (base.getId() > this.getId()) {

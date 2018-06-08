@@ -13,9 +13,11 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.webdevsummer1zhaohuang2018.models.Assignment;
 import com.example.webdevsummer1zhaohuang2018.models.BaseExamQuestion;
 import com.example.webdevsummer1zhaohuang2018.models.EssayExamQuestion;
 import com.example.webdevsummer1zhaohuang2018.models.Exam;
@@ -153,6 +155,62 @@ public class QuestionService {
 		
 		response.setStatus(HttpServletResponse.SC_NOT_FOUND);
 		return "{\"Error\":\"Exam With That Id Not Found\"}";		
+	}
+	
+	@PutMapping("/api/question/{questionId}/essay")
+	public String updateEssayQuestion(@PathVariable("questionId") int questionId,
+			@RequestBody EssayExamQuestion essayQuestion , HttpServletResponse response) {
+		Optional<EssayExamQuestion> qData = essayRepository.findById(questionId);
+		if(qData.isPresent() == false) {
+			response.setStatus(HttpServletResponse.SC_NOT_FOUND);
+			return"{\"error\":\"Question With That Id Not Found\"}";
+		}
+		essayQuestion.setId(questionId);
+		essayQuestion.setExam(qData.get().getExam());
+		essayRepository.save(essayQuestion);
+		return"{\"Success\":\"Question Updated\"}";
+	}
+	
+	@PutMapping("/api/question/{questionId}/fill")
+	public String updateFillQuestion(@PathVariable("questionId") int questionId,
+			@RequestBody FillInTheBlanksExamQuestion fillQuestion , HttpServletResponse response) {
+		Optional<FillInTheBlanksExamQuestion> qData = fillRepository.findById(questionId);
+		if(qData.isPresent() == false) {
+			response.setStatus(HttpServletResponse.SC_NOT_FOUND);
+			return"{\"error\":\"Question With That Id Not Found\"}";
+		}
+		fillQuestion.setId(questionId);
+		fillQuestion.setExam(qData.get().getExam());
+		fillRepository.save(fillQuestion);
+		return"{\"Success\":\"Question Updated\"}";
+	}
+	
+	@PutMapping("/api/question/{questionId}/multiple")
+	public String updateMultipleQuestion(@PathVariable("questionId") int questionId,
+			@RequestBody MultipleChoiceExamQuestion multiQuestion , HttpServletResponse response) {
+		Optional<MultipleChoiceExamQuestion> qData = multipleRepository.findById(questionId);
+		if(qData.isPresent() == false) {
+			response.setStatus(HttpServletResponse.SC_NOT_FOUND);
+			return"{\"error\":\"Question With That Id Not Found\"}";
+		}
+		multiQuestion.setId(questionId);
+		multiQuestion.setExam(qData.get().getExam());
+		multipleRepository.save(multiQuestion);
+		return"{\"Success\":\"Question Updated\"}";
+	}
+	
+	@PutMapping("/api/question/{questionId}/true")
+	public String updateTrueQuestion(@PathVariable("questionId") int questionId,
+			@RequestBody TrueOrFalseExamQuestion trueQuestion , HttpServletResponse response) {
+		Optional<TrueOrFalseExamQuestion> qData = trueRepository.findById(questionId);
+		if(qData.isPresent() == false) {
+			response.setStatus(HttpServletResponse.SC_NOT_FOUND);
+			return"{\"error\":\"Question With That Id Not Found\"}";
+		}
+		trueQuestion.setId(questionId);
+		trueQuestion.setExam(qData.get().getExam());
+		trueRepository.save(trueQuestion);
+		return"{\"Success\":\"Question Updated\"}";
 	}
 	
 }
